@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 21:14:11 by chanspar          #+#    #+#             */
-/*   Updated: 2023/05/26 15:34:57 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:03:09 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_printf(const char *format, ...)
 {
-	va_list
+	va_list ap;
 
 }
