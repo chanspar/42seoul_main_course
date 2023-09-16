@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:33:10 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/13 21:43:45 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:16:18 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	word_cnt(char *str, char c)
 	return (cnt);
 }
 
-static int	fail_free(char **p, int i)
+int	fail_free(char **p, int i)
 {
 	while (0 <= i)
 	{
@@ -100,17 +100,26 @@ char	**ft_split(char const *s, char c)
 {
 	char	**p;
 	int		wd_cnt;
-	int		i;
 
 	if (s == 0)
 		return (0);
-	i = 0;
-	wd_cnt = word_cnt((char *)s, c);
+	if (c == ' ')
+		wd_cnt = word_cnt1((char *)s, c);
+	else
+		wd_cnt = word_cnt((char *)s, c);
 	p = (char **)malloc(sizeof(char *) * (wd_cnt + 1));
 	if (p == 0)
 		return (0);
-	if (mal_str(p, (char *)s, c) == 0)
-		return (0);
+	if (c == ' ')
+	{
+		if (mal_str1(p, (char *)s, c) == 0)
+			return (0);
+	}
+	else
+	{
+		if (mal_str(p, (char *)s, c) == 0)
+			return (0);
+	}
 	p[wd_cnt] = 0;
 	return (p);
 }
