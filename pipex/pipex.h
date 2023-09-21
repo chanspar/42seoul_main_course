@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:39:20 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/16 11:10:27 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:31:25 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int			fail_free(char **p, int i);
 
 char		*find_path(char *envp[], t_info *info);
 char		**path_list(t_info *info);
-char		*merge_cmd(char **env_path, char **cmd);
+char		*merge_utils(char **env_path, char *cmd_tmp, t_info *info);
+char		*merge_cmd(char **env_path, char **cmd, t_info *info);
 int			check_slash(char **cmd);
 void		input_info(t_info *info, char *av[], char *envp[]);
 void		errno_print(char *str, t_info *info);
 void		err_print(char *str, t_info *info);
 void		err_print_s(char *str1, char *str2, t_info *info);
-void		close_fd(int fildes);
 void		dup2_check(int fd1, int fd2);
 void		process1(t_info *info);
 void		process2(t_info *info);
