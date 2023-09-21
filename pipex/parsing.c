@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:45:21 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 21:28:16 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:49:04 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,15 @@ void	input_info(t_info *info, char *av[], char *envp[])
 		info->cmd1 = ft_split(av[2], ' ');
 		if (info->cmd1 == 0)
 			err_print("Memory allocation fail", info);
-		info->cmd_path1 = merge_cmd(info->path, info->cmd1, info);
+		if (info->cmd1[0] != 0)
+			info->cmd_path1 = merge_cmd(info->path, info->cmd1, info);
 	}
 	if (ft_strncmp(av[3], "", ft_strlen(av[3])) != 0)
 	{
 		info->cmd2 = ft_split(av[3], ' ');
 		if (info->cmd2 == 0)
 			err_print("Memory allocation fail", info);
-		info->cmd_path2 = merge_cmd(info->path, info->cmd2, info);
+		if (info->cmd2[0] != 0)
+			info->cmd_path2 = merge_cmd(info->path, info->cmd2, info);
 	}
 }

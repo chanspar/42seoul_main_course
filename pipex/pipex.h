@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:39:20 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 19:31:25 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:48:42 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_info
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	int		pserr;
 }	t_info;
 
 size_t		ft_strlen(const char *s);
@@ -58,8 +57,11 @@ void		errno_print(char *str, t_info *info);
 void		err_print(char *str, t_info *info);
 void		err_print_s(char *str1, char *str2, t_info *info);
 void		dup2_check(int fd1, int fd2);
+void		process1_util(t_info *info);
 void		process1(t_info *info);
 void		process2(t_info *info);
 void		process3(t_info *info);
+void		free_utils(t_info *info);
+void		free_struct(t_info *info);
 
 #endif

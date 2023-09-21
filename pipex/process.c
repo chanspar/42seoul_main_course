@@ -6,11 +6,25 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 03:38:41 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 22:03:12 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:49:02 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	process1_util(t_info *info)
+{
+	if (info->infile_fd == -1)
+		errno_print(info->infile, info);
+	if (info->cmd1 == 0)
+		err_print("pipex: permission denied:", info);
+	if (info->cmd1[0] == 0)
+		err_print("pipex: command not found:", info);
+	if (check_slash(info->cmd1) == 1 && access(info->cmd1[0], X_OK) != 0)
+		err_print_s("no such file or directory: ", info->cmd1[0], info);
+	if (info->cmd_path1 == 0)
+		err_print_s("command not found: ", info->cmd1[0], info);
+}
 
 void	process1(t_info *info)
 {
@@ -21,14 +35,7 @@ void	process1(t_info *info)
 		errno_print("fork fail", info);
 	else if (info->pid1 == 0)
 	{
-		if (info->infile_fd == -1)
-			errno_print(info->infile, info);
-		if (info->cmd1 == 0)
-			err_print("pipex: permission denied:", info);
-		if (check_slash(info->cmd1) == 1 && access(info->cmd1[0], X_OK) != 0)
-			err_print_s("no such file or directory: ", info->cmd1[0], info);
-		if (info->cmd_path1 == 0)
-			err_print_s("command not found: ", info->cmd1[0], info);
+		process1_util(info);
 		close(info->fd[0]);
 		close(info->outfile_fd);
 		dup2_check(info->infile_fd, STDIN_FILENO);
@@ -52,6 +59,8 @@ void	process2(t_info *info)
 			errno_print(info->outfile, info);
 		if (info->cmd2 == 0)
 			err_print("pipex: permission denied:", info);
+		if (info->cmd2[0] == 0)
+			err_print("pipex: command not found:", info);
 		if (check_slash(info->cmd2) == 1 && access(info->cmd2[0], X_OK) != 0)
 			err_print_s("no such file or directory: ", info->cmd2[0], info);
 		if (info->cmd_path2 == 0)
