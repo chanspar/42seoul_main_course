@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:39:18 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 22:49:11 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:52:34 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	free_struct(t_info *info)
 	}
 	free_utils(info);
 }
-
-
 
 int	main(int ac, char *av[], char *envp[])
 {

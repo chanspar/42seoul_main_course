@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 03:38:41 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 22:49:02 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:57:08 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,43 @@
 void	process1_util(t_info *info)
 {
 	if (info->infile_fd == -1)
-		errno_print(info->infile, info);
+	{
+		if (access(info->infile, F_OK) == -1)
+			errno_print(info->infile, info);
+		else if (access(info->infile, R_OK) == -1)
+			errno_print(info->infile, info);
+		else
+			errno_print(info->infile, info);
+	}
 	if (info->cmd1 == 0)
-		err_print("pipex: permission denied:", info);
+		err_print("pipex: permission denied: ", info);
 	if (info->cmd1[0] == 0)
-		err_print("pipex: command not found:", info);
+		err_print("pipex: command not found: ", info);
 	if (check_slash(info->cmd1) == 1 && access(info->cmd1[0], X_OK) != 0)
 		err_print_s("no such file or directory: ", info->cmd1[0], info);
 	if (info->cmd_path1 == 0)
 		err_print_s("command not found: ", info->cmd1[0], info);
+}
+
+void	process2_util(t_info *info)
+{
+	if (info->outfile_fd == -1)
+	{
+		if (access(info->outfile, F_OK) == -1)
+			errno_print(info->outfile, info);
+		else if (access(info->outfile, R_OK) == -1)
+			errno_print(info->outfile, info);
+		else
+			errno_print(info->outfile, info);
+	}
+	if (info->cmd2 == 0)
+		err_print("pipex: permission denied: ", info);
+	if (info->cmd2[0] == 0)
+		err_print("pipex: command not found: ", info);
+	if (check_slash(info->cmd2) == 1 && access(info->cmd2[0], X_OK) != 0)
+		err_print_s("no such file or directory: ", info->cmd2[0], info);
+	if (info->cmd_path2 == 0)
+		err_print_s("command not found: ", info->cmd2[0], info);
 }
 
 void	process1(t_info *info)
@@ -55,16 +83,7 @@ void	process2(t_info *info)
 		errno_print("fork fail", info);
 	else if (info->pid2 == 0)
 	{
-		if (info->outfile_fd == -1)
-			errno_print(info->outfile, info);
-		if (info->cmd2 == 0)
-			err_print("pipex: permission denied:", info);
-		if (info->cmd2[0] == 0)
-			err_print("pipex: command not found:", info);
-		if (check_slash(info->cmd2) == 1 && access(info->cmd2[0], X_OK) != 0)
-			err_print_s("no such file or directory: ", info->cmd2[0], info);
-		if (info->cmd_path2 == 0)
-			err_print_s("command not found: ", info->cmd2[0], info);
+		process2_util(info);
 		close(info->fd[1]);
 		close(info->infile_fd);
 		dup2_check(info->fd[0], STDIN_FILENO);
