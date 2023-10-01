@@ -24,7 +24,7 @@ void	here_doc_info(t_info *info, char *av[], char *envp[])
 	{
 		info->cmd1 = ft_split(av[3], ' ');
 		if (info->cmd1 == 0)
-			err_print_b("Memory allocation fail", info);
+			err_print_hd("Memory allocation fail", info);
 		if (info->cmd1[0] != 0)
 			info->cmd_path1 = merge_cmd_b(info->path, info->cmd1, info);
 	}
@@ -32,7 +32,7 @@ void	here_doc_info(t_info *info, char *av[], char *envp[])
 	{
 		info->cmd2 = ft_split(av[4], ' ');
 		if (info->cmd2 == 0)
-			err_print_b("Memory allocation fail", info);
+			err_print_hd("Memory allocation fail", info);
 		if (info->cmd2[0] != 0)
 			info->cmd_path2 = merge_cmd_b(info->path, info->cmd2, info);
 	}
@@ -44,6 +44,9 @@ int	make_temp(t_info *info)
 	int		tries;
 	char	*tmp;
 
+	info->temp = ft_strdup("/tmp/mytempfile");
+	if (info->temp == 0)
+		err_print_hd("Memory allocation fail", info);
 	tries = 10;
 	while (tries > 0)
 	{
@@ -54,7 +57,7 @@ int	make_temp(t_info *info)
 		info->temp = ft_strjoin(tmp, "_123");
 		free(tmp);
 		if (info->temp == 0)
-			err_print_b("Memory allocation fail", info);
+			err_print_hd("Memory allocation fail", info);
 		tries--;
 	}
 	return (-1);
@@ -64,12 +67,6 @@ void	input_stream(t_info *info)
 {
 	char	*line;
 
-	info->temp = ft_strdup("/tmp/mytempfile");
-	if (info->temp == 0)
-		err_print_b("Memory allocation fail", info);
-	info->temp_fd = make_temp(info);
-	if (info->temp_fd == -1)
-		err_print_b("fail to make file", info);
 	while (1)
 	{
 		write(1, "pipe heredoc> ", 14);
@@ -86,10 +83,14 @@ void	free_here_doc_utils(t_info *info)
 	int	i;
 
 	i = 0;
-	while (info->path[i] != 0)
+	if (info->path != 0)
 	{
-		free(info->path[i]);
-		i++;
+		while (info->path[i] != 0)
+		{
+			free(info->path[i]);
+			i++;
+		}
+		free(info->path);
 	}
 	if (info->cmd_path1 != 0)
 		free(info->cmd_path1);

@@ -67,3 +67,12 @@ void	dup2_check_b(int fd1, int fd2)
 	if (dup2(fd1, fd2) == -1)
 		exit(1);
 }
+
+void	close_fd_b(t_info *info, int fdfd)
+{
+	if (fdfd >= 0)
+	{
+		if (close(fdfd) == -1)
+			errno_print_hd("close fail", info);
+	}
+}
