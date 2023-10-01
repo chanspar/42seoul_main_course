@@ -52,7 +52,7 @@ void	input_info_b(t_info *info, int ac, char *av[], char *envp[])
 	ft_memset(info, 0, sizeof(t_info));
 	info->infile = av[1];
 	info->outfile = av[ac - 1];
-	info->infile_fd = open(av[1], O_RDWR);
+	info->infile_fd = open(av[1], O_RDONLY);
 	info->outfile_fd = open(av[ac -1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	info->envp = envp;
 	info->path = path_list_b(info);

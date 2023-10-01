@@ -90,6 +90,5 @@ void	free_others(t_info *info)
 		}
 		free(info->path);
 	}
-	free(info->path);
 	free(info->pids);
 }

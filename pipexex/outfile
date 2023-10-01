@@ -1,0 +1,13 @@
+Makefile
+bonus
+check.c
+err.c
+infile
+libft_utils.c
+outfile
+parsing.c
+pipex.c
+pipex.h
+process.c
+split.c
+whitespace.c
