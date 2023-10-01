@@ -68,7 +68,7 @@ void	dup2_check_b(int fd1, int fd2)
 		exit(1);
 }
 
-void	close_fd_b(t_info *info, int fdfd)
+void	close_fd_b(int fdfd, t_info *info)
 {
 	if (fdfd >= 0)
 	{

@@ -71,7 +71,7 @@ void	errno_print_b(char *str, t_info *info);
 void	err_print_b(char *str, t_info *info);
 void	err_print_s_b(char *str1, char *str2, t_info *info);
 void	dup2_check_b(int fd1, int fd2);
-void	close_fd_b(t_info *info, int fdfd);
+void	close_fd_b(int fdfd, t_info *info);
 
 char	*ft_free(char **str);
 char	*make_line(long long idx, char *tmp);

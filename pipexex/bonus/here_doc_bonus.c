@@ -15,7 +15,9 @@
 void	here_doc_info(t_info *info, char *av[], char *envp[])
 {
 	ft_memset(info, 0, sizeof(t_info));
-	info->tag = av[2];
+	info->tag = ft_strjoin(av[2], "\n");
+	if (info->tag == 0)
+		err_print_hd("Memory allocation fail", info);
 	info->outfile = av[5];
 	info->outfile_fd = open(av[5], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	info->envp = envp;
@@ -71,7 +73,9 @@ void	input_stream(t_info *info)
 	{
 		write(1, "pipe heredoc> ", 14);
 		line = get_next_line(0);
-		if (!ft_strncmp(info->tag, line, ft_strlen(info->tag)) || !line)
+		if (!line)
+			break ;
+		if (!ft_strncmp(info->tag, line, ft_strlen(info->tag)))
 			break ;
 		write(info->temp_fd, line, ft_strlen(line));
 		free(line);
@@ -96,6 +100,8 @@ void	free_here_doc_utils(t_info *info)
 		free(info->cmd_path1);
 	if (info->cmd_path2 != 0)
 		free(info->cmd_path2);
+	if (info->tag != 0)
+		free(info->tag);
 }
 
 void	free_here_doc(t_info *info)

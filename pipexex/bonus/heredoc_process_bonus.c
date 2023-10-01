@@ -55,16 +55,15 @@ void	process_c1(t_info *info)
 	info->temp_fd = make_temp(info);
 	if (info->temp_fd == -1)
 		err_print_hd("fail to make file", info);
-	else if (info->pid1 == 0)
+	if (info->pid1 == 0)
 	{
-		input_stream(info);
 		process_c1_util(info);
-		close_fd_b(info->fd[0]);
-		close_fd_b(info->outfile_fd);
+		close_fd_b(info->fd[0], info);
+		close_fd_b(info->outfile_fd, info);
 		dup2_check_b(info->temp_fd, 0);
 		dup2_check_b(info->fd[1], 1);
-		close_fd_b(info->temp_fd);
-		close_fd_b(info->fd[1]);
+		close_fd_b(info->temp_fd, info);
+		close_fd_b(info->fd[1], info);
 		if (execve(info->cmd_path1, info->cmd1, info->envp) == -1)
 			errno_print_hd("Execve fail", info);
 	}
@@ -79,25 +78,27 @@ void	process_c2(t_info *info)
 	else if (info->pid2 == 0)
 	{
 		process_c2_util(info);
-		close_fd_b(info->fd[1]);
-		close_fd_b(info->temp_fd);
+		close_fd_b(info->fd[1], info);
+		close_fd_b(info->temp_fd, info);
 		dup2_check_b(info->fd[0], 0);
 		dup2_check_b(info->outfile_fd, 1);
-		close_fd_b(info->fd[0]);
-		close_fd_b(info->outfile_fd);
+		close_fd_b(info->fd[0], info);
+		close_fd_b(info->outfile_fd, info);
 		if (execve(info->cmd_path2, info->cmd2, info->envp) == -1)
 			errno_print_hd("Execve fail", info);
 	}
+	process_p(info);
 }
 
 void	process_p(t_info *info)
 {
 	int	status;
 
-	close_fd_b(info->fd[0]);
-	close_fd_b(info->fd[1]);
-	close_fd_b(info->outfile_fd);
-	close_fd_b(info->temp_fd);
+	input_stream(info);
+	close_fd_b(info->fd[0], info);
+	close_fd_b(info->fd[1], info);
+	close_fd_b(info->outfile_fd, info);
+	close_fd_b(info->temp_fd, info);
 	if (waitpid(info->pid1, 0, 0) == -1)
 		errno_print_hd("fail wait", info);
 	if (waitpid(info->pid2, &status, 0) == -1)

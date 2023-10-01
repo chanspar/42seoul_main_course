@@ -16,7 +16,7 @@ NAME = pipex
 SRCS = libft_utils.c pipex.c split.c err.c parsing.c whitespace.c check.c process.c
 SRCS_BONUS = check_bonus.c gnl_bonus.c libft_util1_bonus.c multiple_bonus.c err_bonus.c\
             here_doc_bonus.c libft_util2_bonus.c parsing_bonus.c split_bonus.c free_bonus.c\
-			heredoc_process_bonus.c mp_f_l_bonus.c pipex_bonus.c whitespace_bonus.c
+			heredoc_process_bonus.c mp_f_l_bonus.c pipex_bonus.c whitespace_bonus.c err_hd_bonus.c
 OBJS = $(SRCS:%.c=%.o)
 OBJS_BONUS = ${addprefix bonus/, $(SRCS_BONUS:%.c=%.o)}
 HEADER = ./
