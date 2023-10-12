@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:31:33 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/25 20:49:24 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:26:52 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,50 +30,14 @@ void	free_cmd(t_info *info)
 		free(info->cmds_path);
 }
 
-void	free_cmd1(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	if (info->cmd1 != 0)
-	{
-		while (info->cmd1[i] != 0)
-		{
-			free(info->cmd1[i]);
-			i++;
-		}
-		free(info->cmd1);
-	}
-	if (info->cmd_path1 != 0)
-		free(info->cmd_path1);
-}
-
-void	free_cmd_last(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	if (info->cmd2 != 0)
-	{
-		while (info->cmd2[i] != 0)
-		{
-			free(info->cmd2[i]);
-			i++;
-		}
-		free(info->cmd2);
-	}
-	if (info->cmd_path2 != 0)
-		free(info->cmd_path2);
-}
-
-void	free_others(t_info *info)
+void	free_others(t_info *info, int ac)
 {
 	int	i;
 
 	i = 0;
 	if (info->fds != 0)
 	{
-		while (info->fds[i] != 0)
+		while (i < ac - 4)
 		{
 			free(info->fds[i]);
 			i++;
@@ -90,5 +54,6 @@ void	free_others(t_info *info)
 		}
 		free(info->path);
 	}
-	free(info->pids);
+	if (info->pids != 0)
+		free(info->pids);
 }

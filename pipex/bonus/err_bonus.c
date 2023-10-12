@@ -6,11 +6,11 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:15:29 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/22 16:16:45 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:37:31 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	errno_print_b(char *str, t_info *info)
 {
@@ -66,4 +66,13 @@ void	dup2_check_b(int fd1, int fd2)
 {
 	if (dup2(fd1, fd2) == -1)
 		exit(1);
+}
+
+void	close_fd_b(int fdfd, t_info *info)
+{
+	if (fdfd >= 0)
+	{
+		if (close(fdfd) == -1)
+			errno_print_hd("close fail", info);
+	}
 }

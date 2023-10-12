@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:43:51 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 21:22:14 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:27:21 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ void	dup2_check(int fd1, int fd2)
 {
 	if (dup2(fd1, fd2) == -1)
 		exit(1);
+}
+
+void	close_fd(t_info *info, int fdfd)
+{
+	if (fdfd >= 0)
+	{
+		if (close(fdfd) == -1)
+			errno_print("close fail", info);
+	}
 }

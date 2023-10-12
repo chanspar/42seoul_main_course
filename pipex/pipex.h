@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:39:20 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/22 14:55:13 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:51:01 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		errno_print(char *str, t_info *info);
 void		err_print(char *str, t_info *info);
 void		err_print_s(char *str1, char *str2, t_info *info);
 void		dup2_check(int fd1, int fd2);
+void		close_fd(t_info *info, int fdfd);
 void		process1_util(t_info *info);
 void		process2_util(t_info *info);
 void		process1(t_info *info);

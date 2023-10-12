@@ -6,11 +6,11 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:13:29 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/22 16:25:51 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:37:40 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	check_slash_b(char **cmd)
 {

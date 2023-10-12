@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:39:18 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 22:52:34 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:56:46 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	free_utils(t_info *info)
 	int	i;
 
 	i = 0;
-	while (info->path[i] != 0)
+	if (info->path != 0)
 	{
-		free(info->path[i]);
-		i++;
+		while (info->path[i] != 0)
+		{
+			free(info->path[i]);
+			i++;
+		}
+		free(info->path);
 	}
 	if (info->cmd_path1 != 0)
 		free(info->cmd_path1);

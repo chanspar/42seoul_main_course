@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_bonus.c                                        :+:      :+:    :+:   */
+/*   err_hd_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 16:15:29 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/24 16:37:31 by chanspar         ###   ########.fr       */
+/*   Created: 2023/10/10 15:38:00 by chanspar          #+#    #+#             */
+/*   Updated: 2023/10/10 15:38:38 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	errno_print_b(char *str, t_info *info)
+void	errno_print_hd(char *str, t_info *info)
 {
-	if (info->infile_fd != -1)
-		close(info->infile_fd);
 	if (info->outfile_fd != -1)
 		close(info->outfile_fd);
 	if (info->fd[0])
@@ -30,10 +28,8 @@ void	errno_print_b(char *str, t_info *info)
 	exit(1);
 }
 
-void	err_print_b(char *str, t_info *info)
+void	err_print_hd(char *str, t_info *info)
 {
-	if (info->infile_fd != -1)
-		close(info->infile_fd);
 	if (info->outfile_fd != -1)
 		close(info->outfile_fd);
 	if (info->fd[0])
@@ -45,10 +41,8 @@ void	err_print_b(char *str, t_info *info)
 	exit(1);
 }
 
-void	err_print_s_b(char *str1, char *str2, t_info *info)
+void	err_print_s_hd(char *str1, char *str2, t_info *info)
 {
-	if (info->infile_fd != -1)
-		close(info->infile_fd);
 	if (info->outfile_fd != -1)
 		close(info->outfile_fd);
 	if (info->fd[0])
@@ -60,19 +54,4 @@ void	err_print_s_b(char *str1, char *str2, t_info *info)
 	write(2, str2, ft_strlen(str2));
 	write(2, "\n", 1);
 	exit(1);
-}
-
-void	dup2_check_b(int fd1, int fd2)
-{
-	if (dup2(fd1, fd2) == -1)
-		exit(1);
-}
-
-void	close_fd_b(int fdfd, t_info *info)
-{
-	if (fdfd >= 0)
-	{
-		if (close(fdfd) == -1)
-			errno_print_hd("close fail", info);
-	}
 }

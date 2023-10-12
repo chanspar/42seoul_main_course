@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:11:22 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/26 16:15:22 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:38:48 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ void	process_c1(t_info *info)
 {
 	if (pipe(info->fd) < 0)
 		errno_print_hd("pipe fail", info);
-	info->pid1 = fork();
-	if (info->pid1 == -1)
-		errno_print_hd("fork fail", info);
 	info->temp_fd = make_temp(info);
 	if (info->temp_fd == -1)
 		err_print_hd("fail to make file", info);
+	input_stream(info);
+	info->pid1 = fork();
+	if (info->pid1 == -1)
+		errno_print_hd("fork fail", info);
 	if (info->pid1 == 0)
 	{
 		process_c1_util(info);
@@ -94,7 +95,6 @@ void	process_p(t_info *info)
 {
 	int	status;
 
-	input_stream(info);
 	close_fd_b(info->fd[0], info);
 	close_fd_b(info->fd[1], info);
 	close_fd_b(info->outfile_fd, info);

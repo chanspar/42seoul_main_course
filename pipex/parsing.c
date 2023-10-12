@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:45:21 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/21 22:49:04 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:33:24 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	input_info(t_info *info, char *av[], char *envp[])
 	ft_memset(info, 0, sizeof(t_info));
 	info->infile = av[1];
 	info->outfile = av[4];
-	info->infile_fd = open(av[1], O_RDWR);
+	info->infile_fd = open(av[1], O_RDONLY);
 	info->outfile_fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	info->envp = envp;
 	info->path = path_list(info);

@@ -6,11 +6,11 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:11:18 by chanspar          #+#    #+#             */
-/*   Updated: 2023/09/22 17:35:15 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:30:36 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	*find_path_b(char *envp[], t_info *info)
 {
@@ -47,29 +47,25 @@ char	**path_list_b(t_info *info)
 	return (tmp);
 }
 
-void	input_info_b(t_info *info, char *av[], char *envp[])
+void	make_cmd(t_info *info, char *av[], int idx)
+{
+	if (ft_strncmp(av[idx + 2], "", ft_strlen(av[idx + 2])) != 0)
+	{
+		info->cmds = ft_split(av[idx + 2], ' ');
+		if (info->cmds == 0)
+			err_print_b("Memory allocation fail", info);
+		if (info->cmds[0] != 0)
+			info->cmds_path = merge_cmd_b(info->path, info->cmds, info);
+	}
+}
+
+void	input_info_b(t_info *info, int ac, char *av[], char *envp[])
 {
 	ft_memset(info, 0, sizeof(t_info));
 	info->infile = av[1];
-	info->outfile = av[4];
-	info->infile_fd = open(av[1], O_RDWR);
-	info->outfile_fd = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	info->outfile = av[ac - 1];
+	info->infile_fd = open(av[1], O_RDONLY);
+	info->outfile_fd = open(av[ac -1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	info->envp = envp;
 	info->path = path_list_b(info);
-	// if (ft_strncmp(av[2], "", ft_strlen(av[2])) != 0)
-	// {
-	// 	info->cmd1 = ft_split(av[2], ' ');
-	// 	if (info->cmd1 == 0)
-	// 		err_print_b("Memory allocation fail", info);
-	// 	if (info->cmd1[0] != 0)
-	// 		info->cmd_path1 = merge_cmd_b(info->path, info->cmd1, info);
-	// }
-	// if (ft_strncmp(av[3], "", ft_strlen(av[3])) != 0)
-	// {
-	// 	info->cmd2 = ft_split(av[3], ' ');
-	// 	if (info->cmd2 == 0)
-	// 		err_print_b("Memory allocation fail", info);
-	// 	if (info->cmd2[0] != 0)
-	// 		info->cmd_path2 = merge_cmd_b(info->path, info->cmd2, info);
-	// }
 }
