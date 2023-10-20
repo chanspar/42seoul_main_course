@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:08:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/10/20 13:04:18 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:27:01 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw(t_info *info)
 		x = 0;
 		while (x < info->x)
 		{
-			// xaxis_base_rotate();
+
 			x++;
 		}
 		y++;
