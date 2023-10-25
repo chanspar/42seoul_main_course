@@ -6,24 +6,25 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 21:03:52 by chanspar          #+#    #+#             */
-/*   Updated: 2023/10/19 22:38:22 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:47:36 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	check_right_file(t_info *info, char *av[])
+void	check_right_file(t_info *info, t_coord *coord, char *av[])
 {
 	int		len;
 
 	ft_memset(info, 0, sizeof(t_info));
+	ft_memset(coord, 0, sizeof(t_coord));
 	len = ft_strlen(av[1]);
 	if (len < 4 || ft_strncmp(av[1] + len - 4, ".fdf", 4) != 0)
 		errno_print(av[1]);
 	map_parse(info, av);
 }
 
-int	get_x(char *file)
+int	get_width(char *file)
 {
 	int		fd;
 	int		x;
@@ -50,7 +51,7 @@ int	get_x(char *file)
 	return (x);
 }
 
-int	get_y(char *file)
+int	get_height(char *file)
 {
 	int		fd;
 	int		y;
@@ -98,8 +99,8 @@ void	map_parse(t_info *info, char *av[])
 	int	i;
 	int	j;
 
-	info->x = get_x(av[1]);
-	info->y = get_y(av[1]);
+	info->width = get_width(av[1]);
+	info->height = get_height(av[1]);
 	info->z = make_two_dim(info);
 	i = 0;
 	j = 0;

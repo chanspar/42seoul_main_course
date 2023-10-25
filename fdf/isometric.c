@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:08:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/10/20 13:27:01 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:14:58 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	xaxis_rotate(t_info *info, double theta)
 {
-	int		ay;
-	int		az;
+	double	ay;
+	double	az;
 	int		i;
 	int		j;
-	double	t;
 
 	i = 0;
-	t = theta * M_PI / 180;
-	while (i < info->y)
+	while (i < info->height)
 	{
 		j = 0;
-		while (j < info->x)
+		while (j < info->width)
 		{
 			ay = info->c_y[i][j];
 			az = info->z[i][j];
-			info->c_y[i][j] = ay * cos(t) + az * sin(t);
-			info->z[i][j] = -ay * sin(t) + az * cos(t);
+			info->c_y[i][j] = ay * cos(theta) + az * sin(theta);
+			info->z[i][j] = -ay * sin(theta) + az * cos(theta);
 			j++;
 		}
 		i++;
@@ -39,23 +37,21 @@ void	xaxis_rotate(t_info *info, double theta)
 
 void	yaxis_rotate(t_info *info, double theta)
 {
-	int		ax;
-	int		az;
+	double	ax;
+	double	az;
 	int		i;
 	int		j;
-	double	t;
 
 	i = 0;
-	t = theta * M_PI / 180;
-	while (i < info->y)
+	while (i < info->height)
 	{
 		j = 0;
-		while (j < info->x)
+		while (j < info->width)
 		{
 			ax = info->c_x[i][j];
 			az = info->z[i][j];
-			info->c_x[i][j] = ax * cos(t) - az * sin(t);
-			info->z[i][j] = ax * sin(t) + az * cos(t);
+			info->c_x[i][j] = ax * cos(theta) - az * sin(theta);
+			info->z[i][j] = ax * sin(theta) + az * cos(theta);
 			j++;
 		}
 		i++;
@@ -64,24 +60,21 @@ void	yaxis_rotate(t_info *info, double theta)
 
 void	projection(t_info *info)
 {
-	xaxis_rotate(info, 45);
-	yaxis_rotate(info, 35.264);
-}
+	int	i;
+	int	j;
 
-void	draw(t_info *info)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < info->y)
+	yaxis_rotate(info, 45 * M_PI / 180);
+	xaxis_rotate(info, 35.264 * M_PI / 180);
+	i = 0;
+	while (i < info->height)
 	{
-		x = 0;
-		while (x < info->x)
+		j = 0;
+		while (j < info->width)
 		{
-
-			x++;
+			info->c_x[i][j] *= info->gap;
+			info->c_y[i][j] *= info->gap;
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
