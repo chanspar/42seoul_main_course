@@ -31,49 +31,13 @@ int	**make_two_dim(t_info *info)
 	return (coord);
 }
 
-void	get_xcoord(t_info *info)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < info->height)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			info->c_x[i][j] = j;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	get_ycoord(t_info *info)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < info->height)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			info->c_y[i][j] = i;
-			j++;
-		}
-		i++;
-	}
-}
-
 void	get_coordinate(t_info *info)
 {
 	info->gap = 20;
 	while ((info->width * info->gap) > 2200 || (info->height * info->gap) > 1400)
 		info->gap--;
-	info->c_x = make_two_dim(info);
-	info->c_y = make_two_dim(info);
-	get_xcoord(info);
-	get_ycoord(info);
+	// info->c_x = make_two_dim(info);
+	// info->c_y = make_two_dim(info);
+	// get_xcoord(info);
+	// get_ycoord(info);
 }

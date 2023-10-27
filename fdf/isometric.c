@@ -11,70 +11,78 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-void	xaxis_rotate(t_info *info, double theta)
-{
-	double	ay;
-	double	az;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < info->height)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			ay = info->c_y[i][j];
-			az = info->z[i][j];
-			info->c_y[i][j] = ay * cos(theta) + az * sin(theta);
-			info->z[i][j] = -ay * sin(theta) + az * cos(theta);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	yaxis_rotate(t_info *info, double theta)
+void	xaxis_rotate(t_coord *coord, double theta)
 {
 	double	ax;
+	double	ay;
 	double	az;
-	int		i;
-	int		j;
 
-	i = 0;
-	while (i < info->height)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			ax = info->c_x[i][j];
-			az = info->z[i][j];
-			info->c_x[i][j] = ax * cos(theta) - az * sin(theta);
-			info->z[i][j] = ax * sin(theta) + az * cos(theta);
-			j++;
-		}
-		i++;
-	}
+	ax = coord->x1;
+	ay = coord->y1;
+	az = coord->z1;
+	coord->x1 = ax;
+	coord->y1 = (ay * cos(theta) + (az * sin(theta) * -1));
+	coord->z1 = (ay * sin(theta) + az * cos(theta));
+	ax = coord->x2;
+	ay = coord->y2;
+	az = coord->z2;
+	coord->x2 = ax;
+	coord->y2 = (ay * cos(theta) + (az * sin(theta) * -1));
+	coord->z2 = (ay * sin(theta) + az * cos(theta));
 }
 
-void	projection(t_info *info)
+void	yaxis_rotate(t_coord *coord, double theta)
 {
-	int	i;
-	int	j;
+	double	ax;
+	double	ay;
+	double	az;
 
-	yaxis_rotate(info, 45 * M_PI / 180);
-	xaxis_rotate(info, 35.264 * M_PI / 180);
-	i = 0;
-	while (i < info->height)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			info->c_x[i][j] *= info->gap;
-			info->c_y[i][j] *= info->gap;
-			j++;
-		}
-		i++;
-	}
+	ax = coord->x1;
+	ay = coord->y1;
+	az = coord->z1;
+	// printf("%f %f\n", ax, ay);
+	coord->x1 = (ax * cos(theta) + (az * sin(theta) * -1));
+	coord->y1 = ay;
+	coord->z1 = (ax * sin(theta) + az * cos(theta));
+	// printf("%f %f\n", coord->x1, coord->y1);
+	ax = coord->x2;
+	ay = coord->y2;
+	az = coord->z2;
+	coord->x2 = (ax * cos(theta) + (az * sin(theta) * -1));
+	coord->y2 = ay;
+	coord->z2 = (ax * sin(theta) + az * cos(theta));
+}
+
+void	horizen(t_info *info, t_coord *coord, int x, int y)
+{
+	coord->x1 = x;
+	coord->y1 = y;
+	coord->x2 = x + 1;
+	coord->y2 = y;
+	coord->z1 = info->z[y][x];
+	coord->z2 = info->z[y][x + 1];
+	yaxis_rotate(coord, 45 * M_PI / 180);
+	xaxis_rotate(coord, 35.264 * M_PI / 180);
+	coord->x1 *= info->gap;
+	coord->x2 *= info->gap;
+	coord->y1 *= info->gap;
+	coord->y2 *= info->gap;
+}
+
+void	vertical(t_info *info, t_coord *coord, int x, int y)
+{
+	coord->x1 = x;
+	coord->y1 = y;
+	coord->x2 = x;
+	coord->y2 = y + 1;
+	coord->z1 = info->z[y][x];
+	coord->z2 = info->z[y + 1][x];
+	yaxis_rotate(coord, 45 * M_PI / 180);
+	xaxis_rotate(coord, 35.264 * M_PI / 180);
+	coord->x1 *= info->gap;
+	coord->x2 *= info->gap;
+	coord->y1 *= info->gap;
+	coord->y2 *= info->gap;
 }

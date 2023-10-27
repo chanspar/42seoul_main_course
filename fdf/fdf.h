@@ -29,8 +29,6 @@ typedef struct s_info
 	int		width;
 	int		height;
 	int		**z;
-	int		**c_x;
-	int		**c_y;
 	int		**color;
 	int		gap;
 	void	*mlx_pointer;
@@ -43,6 +41,8 @@ typedef struct s_coord
 	double	x2;
 	double	y1;
 	double	y2;
+	double	z1;
+	double	z2;
 	int		sx;
 	int		sy;
 	int		k;
@@ -64,10 +64,13 @@ void	map_parse(t_info *info, char *av[]);
 int		**make_two_dim(t_info *info);
 
 void	get_coordinate(t_info *info);
-void	projection(t_info *info);
 
-void	bresenham_exe1(t_info *info, t_coord *coord);
-void	bresenham_exe2(t_info *info, t_coord *coord);
+void	horizen(t_info *info, t_coord *coord, int x, int y);
+void	vertical(t_info *info, t_coord *coord, int x, int y);
+
+void	draw(t_info *info, t_coord *coord);
+// void	bresenham_exe1(t_info *info, t_coord *coord);
+// void	bresenham_exe2(t_info *info, t_coord *coord);
 
 void	err_print(char *str);
 void	errno_print(char *str);
