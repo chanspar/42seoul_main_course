@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:53:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/10/24 19:23:36 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:54:36 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,40 @@ int	**make_two_dim(t_info *info)
 	return (coord);
 }
 
-void	get_coordinate(t_info *info)
+void	horizen(t_coord *s, t_coord *f, int x, int y)
+{
+	s->x = x;
+	s->y = y;
+	f->x = x + 1;
+	f->y = y;
+}
+
+void	vertical(t_coord *s, t_coord *f, int x, int y)
+{
+	s->x = x;
+	s->y = y;
+	f->x = x;
+	f->y = y + 1;
+}
+
+void	z_parse(t_info *info, t_coord *s, t_coord *f)
+{
+	s->color = info->color[s->y][s->x];
+	f->color = info->color[f->y][f->x];
+	s->z = info->z[s->y][s->x] * info->gap;
+	f->z = info->z[f->y][f->x] * info->gap;
+	s->x *= info->gap;
+	s->y *= info->gap;
+	f->x *= info->gap;
+	f->y *= info->gap;
+}
+
+void	get_gap(t_info *info)
 {
 	info->gap = 20;
-	while ((info->width * info->gap) > 2200 || (info->height * info->gap) > 1400)
+	while ((info->width * info->gap) > WIDTH
+		|| (info->height * info->gap) > HEIGHT)
 		info->gap--;
-	// info->c_x = make_two_dim(info);
-	// info->c_y = make_two_dim(info);
-	// get_xcoord(info);
-	// get_ycoord(info);
+	if (info->gap <= 0)
+		info->gap = 1;
 }

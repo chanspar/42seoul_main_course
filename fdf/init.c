@@ -6,22 +6,22 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 21:03:52 by chanspar          #+#    #+#             */
-/*   Updated: 2023/10/24 20:47:36 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:49:57 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	check_right_file(t_info *info, t_coord *coord, char *av[])
+void	check_right_file(t_info *info, char *av[])
 {
 	int		len;
 
 	ft_memset(info, 0, sizeof(t_info));
-	ft_memset(coord, 0, sizeof(t_coord));
 	len = ft_strlen(av[1]);
 	if (len < 4 || ft_strncmp(av[1] + len - 4, ".fdf", 4) != 0)
 		errno_print(av[1]);
 	map_parse(info, av);
+	get_gap(info);
 }
 
 int	get_width(char *file)
@@ -83,6 +83,7 @@ void	get_z(t_info *info, char *file, int i, int j)
 		while (tmp[i])
 		{
 			info->z[j][i] = ft_atoi(tmp[i]);
+			get_color(info, tmp[i], i, j);
 			free(tmp[i]);
 			i++;
 		}
@@ -102,6 +103,7 @@ void	map_parse(t_info *info, char *av[])
 	info->width = get_width(av[1]);
 	info->height = get_height(av[1]);
 	info->z = make_two_dim(info);
+	info->color = make_two_dim(info);
 	i = 0;
 	j = 0;
 	get_z(info, av[1], i, j);

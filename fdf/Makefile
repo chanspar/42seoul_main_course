@@ -6,7 +6,7 @@
 #    By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/12 18:14:06 by chanspar          #+#    #+#              #
-#    Updated: 2023/10/23 19:58:55 by chanspar         ###   ########.fr        #
+#    Updated: 2023/11/02 18:19:47 by chanspar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = fdf
 SRCS = fdf.c err.c libft_utils.c libft_utils1.c gnl.c init.c split.c whitespace.c\
-		coordinate.c isometric.c line.c
-
+		coordinate.c isometric.c line.c color.c event.c mlx_utils.c
 OBJS = $(SRCS:%.c=%.o)
 HEADER = ./
 MLX_DIR = ./minilibx_mms_20210621
