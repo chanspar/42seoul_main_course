@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:53:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 08:52:29 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:43:16 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	get_gap(t_info *info)
 	while (((info->max_x - info->min_x) * info->gap + 2 * MARGIN) < MAX_WIDTH
 		&& ((info->max_y - info->min_y) * info->gap + 2 * MARGIN) < MAX_HEIGHT)
 		info->gap++;
-	// if (info->gap > 30)
-		// info->gap = 30;
+	if (info->gap > 30)
+		info->gap = 30;
 	if (info->gap != 1)
 		info->gap--;
 }

@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:29:47 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 10:03:34 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:47:29 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@
 # include <errno.h>
 # include <math.h>
 
-# include <stdio.h>
-
-# define MAX_WIDTH 1920
-# define MAX_HEIGHT 1080
+# define MAX_WIDTH 2500
+# define MAX_HEIGHT 1500
 # define MARGIN 200
 
 # ifndef BUFFER_SIZE
