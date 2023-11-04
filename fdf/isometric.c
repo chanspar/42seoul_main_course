@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:08:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:27:17 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/04 09:20:00 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	xaxis_rotate(t_coord *coord, double theta)
 {
-	int	ay;
-	int	az;
+	double	ay;
+	double	az;
 
 	ay = coord->y;
 	az = coord->z;
@@ -25,8 +25,8 @@ void	xaxis_rotate(t_coord *coord, double theta)
 
 void	yaxis_rotate(t_coord *coord, double theta)
 {
-	int	ax;
-	int	az;
+	double	ax;
+	double	az;
 
 	ax = coord->x;
 	az = coord->z;
@@ -34,72 +34,58 @@ void	yaxis_rotate(t_coord *coord, double theta)
 	coord->z = ax * sin(theta) + az * cos(theta);
 }
 
-// void	zaxis_rotate(t_coord *coord, double theta)
-// {
-// 	int	ax;
-// 	int	ay;
-
-// 	ax = coord->x;
-// 	ay = coord->y;
-// 	coord->x = ax * cos(theta) + ay * sin(theta);
-// 	coord->y = -ax * sin(theta) + ay * cos(theta);
-// }
-
 void	draw_horizen(t_info *info)
 {
-	int		x;
-	int		y;
-	t_coord	start;
-	t_coord	final;
+	int		i;
+	int		j;
+	t_coord	s;
+	t_coord	f;
 
-	y = 0;
-	while (y < info->height)
+	j = 0;
+	while (j < info->height)
 	{
-		x = 0;
-		while (x < info->width - 1)
+		i = 0;
+		while (i < info->width - 1)
 		{
-			horizen(&start, &final, x, y);
-			z_parse(info, &start, &final);
-
-			// yaxis_rotate(&start, -10 * M_PI / 180);
-			// yaxis_rotate(&final, -10 * M_PI / 180);
-
-			// xaxis_rotate(&start, -50 * M_PI / 180);
-			// xaxis_rotate(&final, -50 * M_PI / 180);
-
-			bresenham(info, &start, &final);
-			x++;
+			s.color = info->color[j][i];
+			f.color = info->color[j][i + 1];
+			s.x = (info->x[j][i] + abs_int(info->min_x)) * info->gap + MARGIN;
+			s.y = (info->y[j][i] + abs_int(info->min_y)) * info->gap + MARGIN;
+			f.x = (info->x[j][i + 1] + abs_int(info->min_x)) * info->gap;
+			f.y = (info->y[j][i + 1] + abs_int(info->min_y)) * info->gap;
+			f.x += MARGIN;
+			f.y += MARGIN;
+			bresenham(info, &s, &f);
+			i++;
 		}
-		y++;
+		j++;
 	}
 }
 
 void	draw_vertical(t_info *info)
 {
-	int		x;
-	int		y;
-	t_coord	start;
-	t_coord	final;
+	int		i;
+	int		j;
+	t_coord	s;
+	t_coord	f;
 
-	y = 0;
-	while (y < info->height - 1)
+	j = 0;
+	while (j < info->height - 1)
 	{
-		x = 0;
-		while (x < info->width)
+		i = 0;
+		while (i < info->width)
 		{
-			vertical(&start, &final, x, y);
-			z_parse(info, &start, &final);
-
-			// yaxis_rotate(&start, -10 * M_PI / 180);
-			// yaxis_rotate(&final, -10 * M_PI / 180);
-
-			// xaxis_rotate(&start, -50 * M_PI / 180);
-			// xaxis_rotate(&final, -50 * M_PI / 180);
-
-
-			bresenham(info, &start, &final);
-			x++;
+			s.color = info->color[j][i];
+			f.color = info->color[j + 1][i];
+			s.x = (info->x[j][i] + abs_int(info->min_x)) * info->gap + MARGIN;
+			s.y = (info->y[j][i] + abs_int(info->min_y)) * info->gap + MARGIN;
+			f.x = (info->x[j + 1][i] + abs_int(info->min_x)) * info->gap;
+			f.y = (info->y[j + 1][i] + abs_int(info->min_y)) * info->gap;
+			f.x += MARGIN;
+			f.y += MARGIN;
+			bresenham(info, &s, &f);
+			i++;
 		}
-		y++;
+		j++;
 	}
 }

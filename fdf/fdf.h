@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:29:47 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:19:45 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/04 10:03:34 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 
 # include <stdio.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define MAX_WIDTH 1920
+# define MAX_HEIGHT 1080
+# define MARGIN 200
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -33,6 +34,14 @@ typedef struct s_info
 {
 	int		width;
 	int		height;
+	int		win_x;
+	int		win_y;
+	int		max_x;
+	int		min_x;
+	int		max_y;
+	int		min_y;
+	double	**x;
+	double	**y;
 	int		**z;
 	int		**color;
 	int		gap;
@@ -47,24 +56,26 @@ typedef struct s_info
 
 typedef struct s_coord
 {
-	int	x;
-	int	y;
-	int	z;
-	int	color;
-	int	sx_sy[2];
+	double	x;
+	double	y;
+	double	z;
+	int		color;
+	int		sx_sy[2];
 }	t_coord;
 
 void	check_right_file(t_info *info, char *av[]);
 void	map_parse(t_info *info, char *av[]);
 int		**make_two_dim(t_info *info);
+double	**make_two_dim_d(t_info *info);
 void	get_color(t_info *info, char *str, int i, int j);
-void	mlx_utils(t_info *info);
-
-void	horizen(t_coord *s, t_coord *f, int x, int y);
-void	vertical(t_coord *s, t_coord *f, int x, int y);
-void	z_parse(t_info *info, t_coord *s, t_coord *f);
+void	decide_color(t_coord *cur, t_coord *final, int *cur_color, int step);
 void	get_gap(t_info *info);
+void	get_max_min(t_info *info, t_coord *coord);
+void	get_xy(t_info *info);
+void	mlx_utils(t_info *info);
+void	get_window_size(t_info *info);
 
+int		abs_int(int x);
 void	xaxis_rotate(t_coord *coord, double theta);
 void	yaxis_rotate(t_coord *coord, double theta);
 

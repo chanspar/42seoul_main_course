@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:09:31 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:19:53 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/04 07:23:51 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int ac, char *av[])
 	if (ac != 2)
 		err_print("Usage : ./fdf <filename>");
 	check_right_file(&info, av);
+	printf("%d\n", info.gap);
 	mlx_utils(&info);
-
 	draw_horizen(&info);
 	draw_vertical(&info);
 	event_exe(&info);
