@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:29:47 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 12:47:29 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:01:54 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ typedef struct s_coord
 
 void	check_right_file(t_info *info, char *av[]);
 void	map_parse(t_info *info, char *av[]);
+
 int		**make_two_dim(t_info *info);
 double	**make_two_dim_d(t_info *info);
 void	get_color(t_info *info, char *str, int i, int j);
-void	decide_color(t_coord *cur, t_coord *final, int *cur_color, int step);
-void	get_gap(t_info *info);
-void	get_max_min(t_info *info, t_coord *coord);
+char	*free_z(char **tmp, char *line, int fd);
+
 void	get_xy(t_info *info);
 void	mlx_utils(t_info *info);
 void	get_window_size(t_info *info);
@@ -85,8 +85,7 @@ void	draw_vertical(t_info *info);
 
 void	err_print(char *str);
 void	errno_print(char *str);
-int		close_win(t_info *info);
-int		close_key(int keycode, t_info *info);
+
 void	event_exe(t_info *info);
 
 size_t	ft_strlen(const char *s);

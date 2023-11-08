@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:40:04 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 10:10:49 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:18:53 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ void	incline_low(t_info *info, t_coord *cur, t_coord *final, int dx_dy[2])
 	int	k;
 	int	cur_x;
 	int	cur_y;
-	int	cur_color;
-	int	step;
 
 	cur_x = cur->x;
 	cur_y = cur->y;
-	cur_color = cur->color;
-	step = abs_int((int)final->x - cur_x);
 	k = 2 * dx_dy[1] - dx_dy[0];
 	while (cur_x != (int)final->x)
 	{
@@ -42,8 +38,7 @@ void	incline_low(t_info *info, t_coord *cur, t_coord *final, int dx_dy[2])
 			cur_y += cur->sx_sy[1];
 		}
 		cur_x += cur->sx_sy[0];
-		decide_color(cur, final, &cur_color, step);
-		my_pixel_put(info, cur_x, cur_y, cur_color);
+		my_pixel_put(info, cur_x, cur_y, cur->color);
 	}
 }
 
@@ -52,13 +47,9 @@ void	incline_high(t_info *info, t_coord *cur, t_coord *final, int dx_dy[2])
 	int	k;
 	int	cur_x;
 	int	cur_y;
-	int	cur_color;
-	int	step;
 
 	cur_x = cur->x;
 	cur_y = cur->y;
-	cur_color = cur->color;
-	step = abs_int((int)final->y - cur_y);
 	k = 2 * dx_dy[0] - dx_dy[1];
 	while (cur_y != (int)final->y)
 	{
@@ -70,8 +61,7 @@ void	incline_high(t_info *info, t_coord *cur, t_coord *final, int dx_dy[2])
 			cur_x += cur->sx_sy[0];
 		}
 		cur_y += cur->sx_sy[1];
-		decide_color(cur, final, &cur_color, step);
-		my_pixel_put(info, cur_x, cur_y, cur_color);
+		my_pixel_put(info, cur_x, cur_y, cur->color);
 	}
 }
 

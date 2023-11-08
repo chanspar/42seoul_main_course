@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 21:03:52 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 14:38:49 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/08 20:43:38 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int	get_width(char *file)
 		errno_print(file);
 	line = get_next_line(fd);
 	if (line == 0)
-		errno_print(file);
+		err_print("No data found.");
 	x = word_cnt1(line, ' ');
+	if (x == 0)
+		err_print("No data found.");
 	free(line);
 	line = get_next_line(fd);
 	while (line)
@@ -51,7 +53,6 @@ int	get_width(char *file)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	return (x);
 }
@@ -60,13 +61,21 @@ int	get_height(char *file)
 {
 	int		fd;
 	int		y;
+	char	*line;
 
 	y = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		errno_print(file);
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	if (line == 0)
+		err_print("gnl error");
+	while (line)
+	{
 		y++;
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 	return (y);
 }
@@ -81,6 +90,8 @@ void	get_z(t_info *info, char *file, int i, int j)
 	if (fd == -1)
 		errno_print(file);
 	line = get_next_line(fd);
+	if (line == 0)
+		err_print("gnl error");
 	while (line)
 	{
 		tmp = ft_split(line, ' ');
@@ -92,9 +103,7 @@ void	get_z(t_info *info, char *file, int i, int j)
 			free(tmp[i]);
 			i++;
 		}
-		free(tmp);
-		free(line);
-		line = get_next_line(fd);
+		line = free_z(tmp, line, fd);
 		j++;
 	}
 	close(fd);

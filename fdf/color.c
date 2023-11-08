@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 18:50:25 by chanspar          #+#    #+#             */
-/*   Updated: 2023/11/04 10:10:49 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:01:50 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,4 @@ void	get_color(t_info *info, char *str, int i, int j)
 		info->color[j][i] = 0xffffff;
 	else
 		info->color[j][i] = make_rgb(str + idx);
-}
-
-void	decide_color(t_coord *cur, t_coord *final, int *cur_color, int step)
-{
-	if (cur->color == final->color)
-		*cur_color = cur->color;
-	else
-	{
-		if (cur->color > final->color)
-			*cur_color -= (cur->color - final->color) / step;
-		else
-			*cur_color += (final->color - cur->color) / step;
-	}
 }
