@@ -28,5 +28,7 @@ int	err_print(t_err err)
 		printf("You entered an incorrect must eat\n");
 	else if (err == E_MALERR)
 		printf("MAlloc fail!!");
+	else if (err == E_MUTEXERR)
+		printf("MUTEX error!!");
 	return (1);
 }

@@ -20,6 +20,9 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+# define ACTIVE 0
+# define SHUTDOWN 1
+
 typedef enum e_err
 {
 	E_ARGERR,
@@ -28,7 +31,8 @@ typedef enum e_err
 	E_TTEERR,
 	E_TTSERR,
 	E_MUSTEATERR,
-	E_MALERR
+	E_MALERR,
+	E_MUTEXERR
 }	t_err;
 
 typedef struct s_system
@@ -41,7 +45,7 @@ typedef struct s_system
 	int				state;
 	int				time;
 	pthread_mutex_t	message;
-	pthread_mutex_t	fin;
+	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
 }	t_system;
@@ -61,8 +65,16 @@ int		ft_atoi(const char *str);
 int		arg_parse(t_system *system, int ac, char *av[]);
 int		err_print(t_err err);
 int		check_arg(t_system *system, int ac);
+int		gettime(void);
 
 int		set_env(t_system *system);
 int		set_philos(t_system *system);
+int		set_fork(t_system *system);
 
+void	message(char *str, t_philo *philo);
+int		ft_strcmp(char *s1, char *s2);
+
+int		check_state(t_philo *philo);
+int 	system_state(t_system *system);
+int 	philo_state(t_philo *philo);
 #endif

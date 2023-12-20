@@ -21,7 +21,9 @@ int	main(int ac, char *av[])
 		return (err_print(E_ARGERR));
 	if (arg_parse(&system, ac, av) == 1)
 		return (1);
-	//뮤텍스를 init 세팅 
+	if (set_env(&system) == 1)
+		return (1);
+	
 
 	return (0);
 }

@@ -19,10 +19,16 @@ int	arg_parse(t_system *system, int ac, char *av[])
 	system->time_to_die = ft_atoi(av[2]);
 	system->time_to_eat = ft_atoi(av[3]);
 	system->time_to_sleep = ft_atoi(av[4]);
+	system->must_eat = -1;
+	system->time = gettime();
 	if (ac == 6)
 		system->must_eat = ft_atoi(av[5]);
 	if (check_arg(system, ac) == 1)
 		return (1);
+	if (pthread_mutex_init(&(system->message), NULL) != 0)
+		return (err_print(E_MUTEXERR));
+	if (pthread_mutex_init(&(system->fin), NULL) != 0)
+		return (err_print(E_MUTEXERR));
 	return (0);
 }
 
@@ -41,28 +47,10 @@ int	check_arg(t_system *system, int ac)
 	return (0);
 }
 
-int	set_env(t_system *system)
+int	gettime(void)
 {
-	if (set_philos(system) == 1)
-		return (1);
+	struct timeval	tv;
 
-}
-
-int	set_philos(t_system *system)
-{
-	int	i;
-
-	i = 0;
-	system->philos = (t_philo *)malloc(sizeof(t_philo) * system->num_philo);
-	if (!system->philos)
-		return (err_print(E_MALERR));
-	while (i < system->num_philo)
-	{
-		system->philos[i].id = i;
-		system->philos[i].eat_cnt = 0;
-		system->philos[i].life = 0; 
-		system->philos[i].system = system;
-		i++;
-	}
-	return (0);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec) / 1000);
 }
