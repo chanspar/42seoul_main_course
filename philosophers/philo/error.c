@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:11:09 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/19 19:37:58 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:20:05 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	err_print(t_err err)
 		printf("MAlloc fail!!");
 	else if (err == E_MUTEXERR)
 		printf("MUTEX error!!");
+	else if (err == E_THREADERR)
+		printf("Thread create error!!");
 	return (1);
 }

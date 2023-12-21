@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 13:10:51 by chanspar          #+#    #+#             */
+/*   Updated: 2023/12/21 20:08:49 by chanspar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -18,8 +29,7 @@ void	*thread_action(void *ptr)
 		sleeping(philo);
 		if (check_state(philo))
 			break ;
-		thinkin(philo);
-
+		thinking(philo);
 	}
 
 	return (0);
@@ -32,8 +42,8 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(philo->l_fork);
 	message("has taken a fork", philo);
 	message("is eating", philo);
-	//ft_usleep 
-	philo->life = gettime();
+	// ft_usleep(philo->system->time_to_eat);
+	philo->last_eat = gettime();
 	philo->eat_cnt++;
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
@@ -42,8 +52,7 @@ void	eating(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	message("is sleeping", philo);
-	//ft_usleep
-
+	// ft_usleep(philo->system->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)

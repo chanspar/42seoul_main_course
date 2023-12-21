@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:16:29 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/19 19:46:12 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:08:51 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	arg_parse(t_system *system, int ac, char *av[])
 		return (1);
 	if (pthread_mutex_init(&(system->message), NULL) != 0)
 		return (err_print(E_MUTEXERR));
-	if (pthread_mutex_init(&(system->fin), NULL) != 0)
-		return (err_print(E_MUTEXERR));
+	if (pthread_mutex_init(&(system->lock), NULL) != 0)
+		return (free_system(system, 1, E_MUTEXERR, 0));
 	return (0);
 }
 
@@ -47,10 +47,10 @@ int	check_arg(t_system *system, int ac)
 	return (0);
 }
 
-int	gettime(void)
+long long	gettime(void)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec) / 1000);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

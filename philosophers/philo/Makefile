@@ -6,14 +6,14 @@
 #    By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:19:02 by chanspar          #+#    #+#              #
-#    Updated: 2023/12/19 15:09:39 by chanspar         ###   ########.fr        #
+#    Updated: 2023/12/21 20:12:04 by chanspar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo
-SRCS = philo.c parse.c utils.c error.c
+SRCS = error.c utils.c action.c monitoring.c philo.c setting.c case.c free.c parse.c                
 OBJS = $(SRCS:%.c=%.o)
 HEADER = philo.h
 

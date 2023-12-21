@@ -6,12 +6,11 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:32:57 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/19 19:19:59 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:03:44 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	main(int ac, char *av[])
 {
@@ -23,7 +22,7 @@ int	main(int ac, char *av[])
 		return (1);
 	if (set_env(&system) == 1)
 		return (1);
-	
+	philo_case(&system);
 
 	return (0);
 }

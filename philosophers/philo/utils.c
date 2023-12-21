@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:29:01 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/18 16:06:03 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:09:15 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + (*str - '0');
-		if (num > 9223372036854775807)
+		if (num > 2147483647)
 		{
 			if (sign == 1)
 				return (-1);
@@ -41,38 +41,38 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-void	flow_time(t_philo *philo, int wait_time)
+void	ft_usleep(int wait, t_philo *philo)
 {
-	int	start_time;
-	int	current_time;
+	int	start;
+	int	now;
 
-	start_time = gettime();
-	current_time = gettime();
-	while (current_time - start_time < wait_time)
+	start = gettime();
+	now = gettime();
+	while (now - start < wait)
 	{
-		usleep(200);
-		if (philo && )
-
+		usleep(100);
+		now = gettime();
+		if (philo && check_state(philo))
+			break ;
 	}
-
 }
 
 void	message(char *str, t_philo *philo)
 {
-	int	time;
+	long long	time;
 
 	pthread_mutex_lock(&philo->system->message);
-	if (system_state(philo->system) == SHUTDOWN)
+	if (system_state(philo->system) == OFF)
 	{
 		pthread_mutex_unlock(&philo->system->message);
 		return ;
 	}
-	time = gettime - philo->system->time;
-	printf("%d %d %s\n", time, philo->id, str);
+	time = gettime() - philo->system->time;
+	printf("%lld %d %s\n", time, philo->id, str);
 	if (!ft_strcmp(str, "died"))
 	{
 		pthread_mutex_lock(&philo->system->lock);
-		philo->system->state = SHUTDOWN;
+		philo->system->state = OFF;
 		pthread_mutex_unlock(&philo->system->lock);
 	}
 	pthread_mutex_unlock(&philo->system->message);
