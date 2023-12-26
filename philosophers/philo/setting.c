@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:47:46 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/21 12:50:47 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:48:09 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	set_philos(t_system *system)
 	i = 0;
 	system->philos = (t_philo *)malloc(sizeof(t_philo) * system->num_philo);
 	if (!system->philos)
-		return (free_system(system, 2, E_MALERR, 0));
+		return (free_system(system, 2, e_malerr, 0));
 	while (i < system->num_philo)
 	{
 		system->philos[i].id = i + 1;
 		system->philos[i].eat_cnt = 0;
 		system->philos[i].last_eat = gettime();
+		if (system->philos[i].last_eat == -1)
+			return (free_system(system, 3, e_gettimeerr, 0));
 		system->philos[i].system = system;
 		i++;
 	}
@@ -48,11 +50,11 @@ int	set_fork(t_system *system)
 	i = 0;
 	system->forks = malloc(sizeof(pthread_mutex_t) * system->num_philo);
 	if (!system->forks)
-		return (free_system(system, 3, E_MALERR, 0));
+		return (free_system(system, 3, e_malerr, 0));
 	while (i < system->num_philo)
 	{
 		if (pthread_mutex_init(&(system->forks[i]), NULL) != 0)
-			return (free_system(system, 4, E_MUTEXERR, i));
+			return (free_system(system, 4, e_mutexerr, i));
 		i++;
 	}
 	system->philos[0].l_fork = &system->forks[0];

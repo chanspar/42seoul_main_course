@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:29:01 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/21 20:09:15 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/23 15:48:00 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,31 @@ int	ft_atoi(const char *str)
 
 void	ft_usleep(int wait, t_philo *philo)
 {
-	int	start;
-	int	now;
+	long long	start;
+	long long	now;
 
 	start = gettime();
 	now = gettime();
 	while (now - start < wait)
 	{
-		usleep(100);
+		usleep(philo->system->num_philo * 10);
 		now = gettime();
 		if (philo && check_state(philo))
 			break ;
+	}
+}
+
+void	ft_onesleep(int wait)
+{
+	long long	start;
+	long long	now;
+
+	start = gettime();
+	now = gettime();
+	while (now - start < wait)
+	{
+		usleep(10);
+		now = gettime();
 	}
 }
 

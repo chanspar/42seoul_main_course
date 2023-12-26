@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:02:32 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/21 20:14:15 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/23 15:43:17 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ typedef struct s_philo	t_philo;
 
 typedef enum e_err
 {
-	E_ARGERR,
-	E_NUMPHILOERR,
-	E_TTDERR,
-	E_TTEERR,
-	E_TTSERR,
-	E_MUSTEATERR,
-	E_MALERR,
-	E_MUTEXERR,
-	E_THREADERR
+	e_argerr,
+	e_numphiloerr,
+	e_ttderr,
+	e_tteerr,
+	e_ttserr,
+	e_musteaterr,
+	e_malerr,
+	e_mutexerr,
+	e_threaderr,
+	e_gettimeerr
 }	t_err;
 
 typedef struct s_system
@@ -74,22 +75,23 @@ int			set_env(t_system *system);
 int			set_philos(t_system *system);
 int			set_fork(t_system *system);
 
-int		philo_case(t_system *system);
-
+int			philo_case(t_system *system);
+int			thread_exe(t_system *system);
+int			thread_exe2(t_system *system);
 void		*thread_action(void *ptr);
+void		*thread_action2(void *ptr);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
-void		thinking(t_philo *philo);
+void		thinking(t_philo *philo, int time);
 
 void		message(char *str, t_philo *philo);
 int			ft_strcmp(char *s1, char *s2);
 void		ft_usleep(int wait, t_philo *philo);
+void		ft_onesleep(int wait);
 
 int			check_state(t_philo *philo);
 int			system_state(t_system *system);
 int			philo_state(t_philo *philo);
-
-int	thread_exe(t_system *system, int i);
 
 int			free_system(t_system *system, int flag, t_err err, int idx);
 void		free_all(t_system *system);

@@ -6,7 +6,7 @@
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:09:23 by chanspar          #+#    #+#             */
-/*   Updated: 2023/12/21 20:08:48 by chanspar         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:51:03 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	system_state(t_system *system)
 
 int	philo_state(t_philo *philo)
 {
-	int	time;
+	long long	time;
 
 	time = gettime() - philo->last_eat;
 	if (time > philo->system->time_to_die)
