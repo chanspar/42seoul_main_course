@@ -11,3 +11,17 @@
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
+
+int	ms_env_buitin(t_minishell *info, )
+{
+	int	i;
+
+	i = 0;
+	while (info->envp[i])
+	{
+		write(1, info->envp[i], ms_strlen(info->envp[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+	return (BUILT_SUCESS);
+}

@@ -32,6 +32,8 @@ int		ms_pwd(void);
 
 
 int		ms_get_listsize(char **tk_list);
+char	*ms_get_envname(char *envv);
+char	*ms_get_env_value(char *env_name, char **envp);
 
 
 #endif
