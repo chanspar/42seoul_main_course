@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lexer.c                                         :+:      :+:    :+:   */
+/*   ms_pwd_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 01:36:20 by doukim            #+#    #+#             */
-/*   Updated: 2024/01/24 10:50:58 by doukim           ###   ########.fr       */
+/*   Created: 2023/12/29 00:20:01 by chanspar          #+#    #+#             */
+/*   Updated: 2024/01/26 21:23:01 by doukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_lexer.h"
+#include "ms_builtins.h"
 
-int	ms_lexer(t_minishell *info)
+void	ms_cannot_find1(void)
 {
-	t_list		*splited;
+	write(2, "minishell: ", 12);
+	write(2, "cannot find current directorty. please relaunch minishell.\n", 60);
+}
 
-	info->converted = ms_convert(info, info->readline);
-	if (!info->converted)
-		return (1);
-	splited = ms_split(info->converted);
-	if (!splited)
-		return (1);
-	info->tokenlist = ms_tokenize(splited);
-	if (!info->tokenlist)
-		return (1);
-	ms_lstfree(&splited);
-	return (0);
+void	ms_pwd_builtin(void)
+{
+	char	buffer[PATH_MAX];
+
+	g_exit_status = 0;
+	if (getcwd(buffer, PATH_MAX) == NULL)
+	{
+		ms_cannot_find1();
+		exit(1);
+	}
+	write(1, buffer, ms_strlen(buffer));
+	write(1, "\n", 1);
 }

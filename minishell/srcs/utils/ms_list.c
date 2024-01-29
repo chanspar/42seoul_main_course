@@ -6,17 +6,19 @@
 /*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:54:42 by doukim            #+#    #+#             */
-/*   Updated: 2023/12/28 04:32:40 by doukim           ###   ########.fr       */
+/*   Updated: 2024/01/24 09:28:09 by doukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_minishell.h"
+#include "ms_utils.h"
 
 t_list	*ms_lstnewnode(void *data)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
 	new->data = data;
 	new->next = NULL;
 	return (new);
@@ -24,13 +26,15 @@ t_list	*ms_lstnewnode(void *data)
 
 void	ms_lstadd(t_list **lst, void *data)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (!*lst)
 	{
 		*lst = ms_lstnewnode(data);
 		return ;
 	}
+	if (!*lst)
+		return ;
 	tmp = *lst;
 	while (tmp->next != NULL)
 		tmp = tmp->next;

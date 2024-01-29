@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 12:30:05 by chanspar          #+#    #+#             */
-/*   Updated: 2024/01/02 17:01:42 by chanspar         ###   ########.fr       */
+/*   Updated: 2024/01/24 08:10:32 by doukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,42 @@ char	*ms_get_envname(char *envv)
 char	*ms_get_env_value(char *env_name, char **envp)
 {
 	int		i;
-	int		j;
-	char	*tmp_name;
+	int		env_size;
 	char	*env_value;
+	char	*re_name;
 
 	i = 0;
-	while (envp[i])
+	env_size = ms_get_listsize(envp);
+	re_name = ms_strjoin(env_name, "=");
+	if (!re_name)
+		malloc_err();
+	while (i < env_size)
 	{
-		j = 0;
-		tmp_name = ms_get_envname(envp[i]);
-		if (!ms_strncmp(env_name, tmp_name, ms_strlen(env_name) + 1))
+		if (!ms_strncmp(envp[i], re_name, ms_strlen(re_name)))
 		{
-			free(tmp_name);
-			if (!ms_strchr(envp[i], '='))
-				return (NULL);
-			while (envp[i][j] && envp[i][j] != '=')
-				j++;
-			env_value = ms_substr(envp[i], j + 1, ms_strlen(envp[i]) - (j + 1));
+			env_value = ms_strdup(envp[i] + ms_strlen(re_name));
 			if (!env_value)
 				malloc_err();
+			free(re_name);
 			return (env_value);
 		}
-		free(tmp_name);
 		i++;
 	}
-	return (NULL);
+	free(re_name);
+	return (0);
 }
 
+void	ms_double_malloc_free(char ***tmp)
+{
+	int	i;
+
+	i = 0;
+	while ((*tmp) && (*tmp)[i] != 0)
+	{
+		free((*tmp)[i]);
+		i++;
+	}
+	if (*tmp != 0)
+		free(*tmp);
+	*tmp = 0;
+}

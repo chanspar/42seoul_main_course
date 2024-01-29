@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_error.h                                         :+:      :+:    :+:   */
+/*   ms_env_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 21:44:51 by doukim            #+#    #+#             */
-/*   Updated: 2024/01/24 10:59:57 by chanspar         ###   ########.fr       */
+/*   Created: 2023/12/29 00:21:17 by chanspar          #+#    #+#             */
+/*   Updated: 2024/01/23 17:09:08 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_ERROR_H
-# define MS_ERROR_H
+#include "ms_builtins.h"
 
-# include "ms_minishell.h"
+void	ms_env_builtin(t_minishell *info, char **tk_list)
+{
+	int	i;
+	int	env_size;
 
-void	ms_perror(char *str);
-void	ms_lexerror(t_minishell *info, int *error);
-void	ms_parerror(t_minishell *info, int *error);
-void	ms_exeerror(char *filename, int errnum);
-void	ms_msherror(int errnum);
-void	malloc_err(void);
-
-#endif
+	g_exit_status = 0;
+	if (tk_list[1] != 0)
+		return ;
+	i = 0;
+	env_size = ms_get_listsize(info->envp);
+	while (i < env_size)
+	{
+		write(1, info->envp[i], ms_strlen(info->envp[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+}

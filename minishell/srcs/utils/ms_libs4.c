@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lexer.c                                         :+:      :+:    :+:   */
+/*   ms_libs4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 01:36:20 by doukim            #+#    #+#             */
-/*   Updated: 2024/01/24 10:50:58 by doukim           ###   ########.fr       */
+/*   Created: 2024/01/10 07:43:49 by doukim            #+#    #+#             */
+/*   Updated: 2024/01/10 07:45:44 by doukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_lexer.h"
+#include "ms_utils.h"
 
-int	ms_lexer(t_minishell *info)
+void	*ms_memset(void *b, int c, size_t len)
 {
-	t_list		*splited;
+	size_t	idx;
 
-	info->converted = ms_convert(info, info->readline);
-	if (!info->converted)
-		return (1);
-	splited = ms_split(info->converted);
-	if (!splited)
-		return (1);
-	info->tokenlist = ms_tokenize(splited);
-	if (!info->tokenlist)
-		return (1);
-	ms_lstfree(&splited);
-	return (0);
+	idx = 0;
+	while (idx < len)
+		((char *)b)[idx++] = (unsigned char)c;
+	return (b);
 }

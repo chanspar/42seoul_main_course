@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 07:21:34 by doukim            #+#    #+#             */
-/*   Updated: 2023/12/29 01:43:40 by doukim           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:00:35 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_parser.h"
 
-t_bintree	*ms_parser(t_minishell *info)
+int	ms_parser(t_minishell *info)
 {
-	//ms_syntax();
-	//ms_ast_builder();
-	
+	if (ms_syntax(info))
+		return (1);
+	if (ms_cmdlist(info))
+		return (1);
+	return (0);
 }

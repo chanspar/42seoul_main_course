@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_error.h                                         :+:      :+:    :+:   */
+/*   ms_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 21:44:51 by doukim            #+#    #+#             */
-/*   Updated: 2024/01/24 10:59:57 by chanspar         ###   ########.fr       */
+/*   Created: 2024/01/09 23:58:34 by chanspar          #+#    #+#             */
+/*   Updated: 2024/01/10 00:11:23 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_ERROR_H
-# define MS_ERROR_H
+#include "ms_builtins.h"
 
-# include "ms_minishell.h"
+int	ms_check_envexist(t_minishell *info, char *str)
+{
+	int		i;
+	int		env_size;
+	char	*env_name;
 
-void	ms_perror(char *str);
-void	ms_lexerror(t_minishell *info, int *error);
-void	ms_parerror(t_minishell *info, int *error);
-void	ms_exeerror(char *filename, int errnum);
-void	ms_msherror(int errnum);
-void	malloc_err(void);
-
-#endif
+	i = 0;
+	env_size = ms_get_listsize(info->envp);
+	while (i < env_size)
+	{
+		env_name = ms_get_envname(info->envp[i]);
+		if (ms_strncmp(env_name, str, ms_strlen(str) + 1) == 0)
+		{
+			free(env_name);
+			return (i);
+		}
+		free(env_name);
+		i++;
+	}
+	return (0);
+}

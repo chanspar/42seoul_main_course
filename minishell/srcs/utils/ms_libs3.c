@@ -3,28 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ms_libs3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doukim <doukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chanspar <chanspar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:50:39 by doukim            #+#    #+#             */
-/*   Updated: 2023/12/28 05:17:57 by doukim           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:18:44 by chanspar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_minishell.h"
+#include "ms_utils.h"
 
 char	*ms_strjoin_f(char *s1, char *s2)
 {
-	char *ret;
-	
+	char	*ret;
+
 	ret = ms_strjoin(s1, s2);
-	free(s1);
-	free(s2);
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
 	return (ret);
 }
 
 int	ms_iswhitespace(int c)
 {
-	if (9 <= c && c <= 13 || c == 32)
+	if ((9 <= c && c <= 13) || c == 32)
 		return (1);
 	return (0);
 }
@@ -70,4 +72,27 @@ char	*ms_itoa(int n)
 	revnum[idx] = '\0';
 	ms_strrev(revnum);
 	return (ms_strdup(revnum));
+}
+
+char	*ms_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*ret;
+	size_t			idx;
+	const size_t	slen = ms_strlen(s);
+
+	if (start > slen)
+		len = 0;
+	else if (start + len > slen)
+		len = slen - start;
+	ret = (char *)malloc(len + 1);
+	if (!ret)
+		return (NULL);
+	idx = 0;
+	while (idx < len)
+	{
+		ret[idx] = s[start + idx];
+		idx++;
+	}
+	ret[idx] = '\0';
+	return (ret);
 }
