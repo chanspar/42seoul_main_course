@@ -1,5 +1,12 @@
 {
 	"files.associations": {
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"iostream": "cpp",
+		"ostream": "cpp",
+		"streambuf": "cpp",
+		"ios": "cpp",
+		"__config": "cpp",
+		"iosfwd": "cpp",
+		"__locale": "cpp"
 	}
 }
