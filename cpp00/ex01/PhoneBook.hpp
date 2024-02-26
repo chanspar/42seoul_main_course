@@ -2,7 +2,9 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <cctype>
+# include <cstdio>
 # include <cstdlib>
 # include "Contact.hpp"
 
@@ -23,6 +25,8 @@ public:
 	bool 	checkNickName(const std::string s);
 	bool 	checkPhoneNumber(const std::string s);
 	void	checkAddContact(std::string s);
+	std::string	checkLength(std::string s);
+	void	displayContact(int idx);
 };
 
 #endif
