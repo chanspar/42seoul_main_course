@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <string>
 # include <cctype>
 # include <cstdio>
 # include <cstdlib>
