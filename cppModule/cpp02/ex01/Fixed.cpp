@@ -17,7 +17,6 @@ Fixed::Fixed(const Fixed &rhs)
 	RawBits = rhs.getRawBits();
 }
 
-// =  Fixed& 반환 이유 a=b=c같은 형태의 코드가 정상작동하려고
 Fixed& Fixed::operator=(const Fixed &rhs)
 {
 	std::cout << "Copy assignment operator called\n";
@@ -35,4 +34,17 @@ int Fixed::getRawBits( void ) const
 void Fixed::setRawBits( int const raw )
 {
 	RawBits = raw;
+}
+
+
+Fixed::Fixed(const int num)
+{
+	std::cout << "Int constructor called\n";
+	RawBits = num << fractionalBits;
+}
+
+Fixed::Fixed(const float num)
+{
+	std::cout << "Float constructor called\n";
+
 }
