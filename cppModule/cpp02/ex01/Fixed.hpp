@@ -2,6 +2,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
 
 class Fixed 
 {
@@ -18,9 +19,11 @@ public:
 	Fixed& operator=(const Fixed& rhs);
 	int getRawBits( void ) const;
 	void setRawBits( int const raw );
-	float toFloat( void ) const; //고정소수점 실수버전
-	int toInt( void ) const; //고정소수점 정수버전
+	float toFloat( void ) const;
+	int toInt( void ) const;
 };
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
 
 
 #endif
