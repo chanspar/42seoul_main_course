@@ -41,7 +41,7 @@ int main(int ac, char *av[])
 	s1Len = s1.length();
 	s2Len = s2.length();
 
-	inputFile.open(filename);
+	inputFile.open(filename.c_str());
 	if (!inputFile.is_open()) {
 		std::cout << "Failed to open the file.\n";
 		return (1); 
@@ -49,7 +49,7 @@ int main(int ac, char *av[])
 	
 	replaceFile = av[1];
 	replaceFile.append(".replace");
-	outputFile.open(replaceFile);
+	outputFile.open(replaceFile.c_str());
 	if (!outputFile.is_open()) {
 		std::cout << "Failed to open the file.\n";
 		return (1);
