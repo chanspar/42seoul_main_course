@@ -94,7 +94,7 @@ bool Fixed::operator !=(const Fixed& rhs) const
 	return (RawBits != rhs.RawBits);
 }
 
-//Fixed& 아닌 이유 : ex a = b + c + b 일경우 2b + 2c로 나옴
+//Fixed& 아닌 이유 : ex a = b + c + b 일경우 2b + 2c로 나옴 b가 b+c로 바뀌기 때문에
 Fixed Fixed::operator +(const Fixed& rhs)
 {
 	Fixed result;

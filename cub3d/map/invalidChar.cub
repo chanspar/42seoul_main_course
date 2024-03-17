@@ -1,0 +1,18 @@
+NO ./texture/north_tex.xpm
+SO ./texture/south_tex.xpm
+WE ./texture/west_tex.xpm
+EA ./texture/east_tex.xpm
+
+C 255,255,255
+F 255,255,255
+
+AAAAADSFFewrer
+
+111111111111
+100000000001
+100000000001            
+10000E000001
+100000000001
+100000000001
+100000000001
+111111111111

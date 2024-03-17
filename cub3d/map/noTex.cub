@@ -1,0 +1,18 @@
+F     200,76,12    
+
+NO ./texture/north_tex.xpm
+SO ./texture/south_tex.xpm
+WE ./texture/west_tex.xpm
+EA ./texture/easfdsaft_tex.xpm
+
+
+C 92,148,252
+
+11111111
+10000001
+100000011111
+100000000001
+111000000001
+1110000N0001
+100000000001
+111111111111

@@ -29,10 +29,7 @@ void Harl::complain( std::string level ) {
 	void (Harl::*funcPtr[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	int caseNum;
 
-	for (caseNum = 0; caseNum < 4; caseNum++) {
-		if (levels[caseNum] == level) {
-			break ;
-		}
+	for (caseNum = 0; levels[caseNum] != level && caseNum < 4 ; caseNum++) {
 	}
 
 	switch (caseNum) {
