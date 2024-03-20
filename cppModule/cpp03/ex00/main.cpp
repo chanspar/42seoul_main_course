@@ -20,7 +20,7 @@ int main()
 	marine2.takeDamage(2);
 	marine2.beRepaired(3);
 	marine2.beRepaired(5);
-	marine2.takeDamage(100);
+	marine2.takeDamage(100); //죽음
 	marine2.takeDamage(3);
 	marine2.beRepaired(100);
 
@@ -32,7 +32,7 @@ int main()
 	for (int i = 0 ; i < 6; i++) {
 		marine3.beRepaired(100);
 	}
-	
+
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	return 0;
 }
