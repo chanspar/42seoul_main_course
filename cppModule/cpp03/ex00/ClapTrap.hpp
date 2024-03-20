@@ -7,10 +7,11 @@
 class ClapTrap
 {
 private:
-	std::string		name;
-	unsigned int	hitPoints;
-	unsigned int	energyPoints;
-	unsigned int	attackDamage;
+	std::string					name;
+	unsigned int				hitPoints;
+	unsigned int				energyPoints;
+	unsigned int				attackDamage;
+	static const unsigned int	maxHp = 100000; 
 
 public:
 	ClapTrap();
