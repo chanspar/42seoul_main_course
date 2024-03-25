@@ -71,7 +71,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	else{
 		hitPoints -= amount;
 	}
-	std::cout << "ClapTrap " << name << " is damaged " << amount << " ,hitPoints: " << hitPoints << std::endl;
+	std::cout << "ClapTrap " << name << " is damaged " << amount << ", hitPoints: " << hitPoints << std::endl;
 
 }
 
@@ -89,5 +89,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 	for (size_t i = 0; i < amount && hitPoints < maxHp; i++){
 		hitPoints++;
 	}
-	std::cout << "ClapTrap " << name << " is repaired " << amount << " ,hitPoints: " << hitPoints << std::endl;
+	std::cout << "ClapTrap " << name << " is repaired " << amount << ", hitPoints: " << hitPoints << std::endl;
 }
