@@ -6,7 +6,7 @@ Dog::Dog()
 	std::cout << "Dog Default constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& rhs)
+Dog::Dog(const Dog& rhs) : Animal(rhs)
 {
 	type = rhs.type;
 	std::cout << "Dog Copy constructor called" << std::endl;
