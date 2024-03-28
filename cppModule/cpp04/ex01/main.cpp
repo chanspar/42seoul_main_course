@@ -1,8 +1,6 @@
 #include "Animal.hpp"
-#include "WrongAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
 
 //깊은 복사는 실제로 두개의 값이 생성되는 것
 //얕은 복사는 값은 여전히 하나인데 접근 포인터가 2개인것
@@ -15,36 +13,34 @@
 int main()
 {
 	// atexit(a);
-	{
-		const Animal* meta = new Animal();
-		const Animal* j = new Dog();
-		const Animal* i = new Cat();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	delete j; //should not create a leak
+	delete i;
 
-		std::cout << j->getType() << " " << std::endl;
-		std::cout << i->getType() << " " << std::endl;
-		i->makeSound(); //will output the cat sound!
-		j->makeSound();
-		meta->makeSound();
-
-		delete i;
-		delete j;
-		delete meta;
+	std::cout << "---------------------------------------test-------------------------------------------" << std::endl << std::endl;
+	Animal *animalArr[6];
+	std::cout << "----------------------------------Dog constructor-------------------------------------" << std::endl;
+	for (int i = 0; i < 3; i++) {
+		Dog *dog = new Dog();
+		animalArr[i] = dog;
 	}
+	std::cout << std::endl;
+	std::cout << "----------------------------------Cat constructor-------------------------------------" << std::endl;
+	for (int i = 3; i < 6; i++) {
+		Cat *cat = new Cat();
+		animalArr[i] = cat;
+	}
+	std::cout << std::endl;
+
+	std::cout << "----------------------------------animal destructor-------------------------------------" << std::endl;
+	for (int i = 0; i < 6; i++) {
+		delete animalArr[i];
+	}
+
+	Dog basic;
 	{
-		std::cout << "------------------------check wrongClass-------------------" << std::endl;
-		const WrongAnimal* wAnimal = new WrongAnimal();
-		const WrongAnimal* wrongCat = new WrongCat();
-		std::cout << std::endl << "----------------------------checkType-------------------------" << std::endl;
-		std::cout << "wrongAnimal type: " << wAnimal->getType() << " " << std::endl;
-		std::cout << "wrongCat type: " << wrongCat->getType() << " " << std::endl << std::endl;;
-		std::cout << "----------------------------checkSound-------------------------" << std::endl;
-		std::cout << "execute wrongAnimal makeSound(): " << std::endl;
-		wAnimal->makeSound();
-		std::cout << "execute wrongCat makeSound(): " << std::endl;
-		wrongCat->makeSound();
-		std::cout << "----------------------------------------------------------------------------" << std::endl;
-		delete wrongCat;
-		delete wAnimal;
+		Dog tmp = basic;
 	}
 	return 0;
 }

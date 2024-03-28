@@ -31,15 +31,22 @@ int main()
 		std::cout << "------------------------check wrongClass-------------------" << std::endl;
 		const WrongAnimal* wAnimal = new WrongAnimal();
 		const WrongAnimal* wrongCat = new WrongCat();
+		const WrongCat* wrongCat1 = new WrongCat();
+	
 		std::cout << std::endl << "----------------------------checkType-------------------------" << std::endl;
 		std::cout << "wrongAnimal type: " << wAnimal->getType() << " " << std::endl;
-		std::cout << "wrongCat type: " << wrongCat->getType() << " " << std::endl << std::endl;;
+		std::cout << "wrongCat type: " << wrongCat->getType() << " " << std::endl;
+		std::cout << "wrongCat1 type: " << wrongCat1->getType() << " " << std::endl << std::endl;;
+
 		std::cout << "----------------------------checkSound-------------------------" << std::endl;
 		std::cout << "execute wrongAnimal makeSound(): " << std::endl;
 		wAnimal->makeSound();
 		std::cout << "execute wrongCat makeSound(): " << std::endl;
 		wrongCat->makeSound();
+		std::cout << "execute wrongCat1 makeSound(): " << std::endl;
+		wrongCat1->makeSound();
 		std::cout << "----------------------------------------------------------------------------" << std::endl;
+		delete wrongCat1;
 		delete wrongCat;
 		delete wAnimal;
 	}
