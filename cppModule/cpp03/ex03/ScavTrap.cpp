@@ -17,7 +17,7 @@ ScavTrap::ScavTrap(std::string name)
 	std::cout << "ScavTrap " << name << " constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& rhs)
+ScavTrap::ScavTrap(const ScavTrap& rhs) : ClapTrap(rhs)
 {
 	name = rhs.name;
 	hitPoints = rhs.hitPoints;
