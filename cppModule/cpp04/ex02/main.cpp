@@ -2,9 +2,6 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-//깊은 복사는 실제로 두개의 값이 생성되는 것
-//얕은 복사는 값은 여전히 하나인데 접근 포인터가 2개인것
-
 // void a()
 // {
 // 	system("leaks a.out");
@@ -75,3 +72,14 @@ int main()
 
 	return 0;
 }
+
+// int main()
+// {
+// 	// Animal animal;
+// 	Cat cat;
+// 	Dog dog;
+
+// 	cat.makeSound();
+// 	dog.makeSound();
+
+// }
