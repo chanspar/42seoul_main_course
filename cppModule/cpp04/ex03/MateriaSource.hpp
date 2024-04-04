@@ -17,10 +17,8 @@ public:
 	MateriaSource& operator=(const MateriaSource& rhs);
 	virtual ~MateriaSource();
 
-
-	virtual void learnMateria(AMateria*);
+	virtual void learnMateria(AMateria* m);
 	virtual AMateria* createMateria(std::string const & type);
-
 };
 
 #endif

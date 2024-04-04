@@ -1,8 +1,9 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp AMateria.cpp MateriaSource.cpp Character.cpp Ice.cpp Cure.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCS = 
+INCS = Cure.hpp AMateria.hpp ICharacter.hpp IMateriaSource.hpp \
+	MateriaSource.hpp Character.hpp Ice.hpp
 NAME = a.out
 
 all: $(NAME)

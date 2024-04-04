@@ -23,8 +23,7 @@ public:
 	virtual void equip(AMateria* m);
 	virtual void unequip(int idx);
 	virtual void use(int idx, ICharacter& target);
-
-	AMateria* savePtr(int idx);
+	virtual AMateria* savePtr(int idx);
 };
 
 #endif

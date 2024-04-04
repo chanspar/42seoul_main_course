@@ -21,11 +21,6 @@ Character::Character(std::string const & name)
 Character::Character(const Character& rhs)
 {
 	name = rhs.name;
-	for (int i = 0; i < 4; i++) {
-		if (inventory[i]) {
-			delete inventory[i];
-		}
-	}
 	for(int i = 0; i < 4 ; i++) {
 		inventory[i] = NULL;
 		slot[i] = 0;
@@ -84,12 +79,23 @@ void Character::equip(AMateria* m)
 {
 	int idx;
 
+	if (!m) {
+		return ;
+	}
 	for (idx = 0; idx < 4; idx++) {
 		if (slot[idx] == 0)
 			break;
 	}
-	if (idx == 4 || !m) {
+	if (idx == 4) {
+		delete m;
+		std::cout << "equip fail,, delete materia" << std::endl;
 		return ;
+	}
+	for (int i = 0; i < 4; i++) {
+		if (m == inventory[i]) {
+			std::cout << "duplicate materia bug" << std::endl;
+			return ;
+		}
 	}
 	inventory[idx] = m;
 	slot[idx] = 1;
@@ -116,4 +122,3 @@ AMateria* Character::savePtr(int idx)
 {
 	return inventory[idx];
 }
-

@@ -1,10 +1,11 @@
 #include "Cure.hpp"
 
-Cure::Cure() : AMateria("cure")
+Cure::Cure()
 {
+	type = "cure";
 }
 
-Cure::Cure(const Cure& rhs)
+Cure::Cure(const Cure& rhs) : AMateria(rhs)
 {
 	type = rhs.type;
 }
