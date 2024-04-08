@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"exception": "cpp",
+		"__config": "cpp",
+		"filesystem": "cpp",
+		"__functional_03": "cpp",
+		"functional": "cpp"
+	}
+}
