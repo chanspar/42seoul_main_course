@@ -1,26 +1,26 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : target(""), AForm("Shruberry", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShruberryProject", 145, 137), target("home")
 {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-	: target(target), AForm("Shruberry", 145, 137)
+	: AForm("ShruberryProject", 145, 137), target(target)
 {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs)
-	: target(rhs.target), AForm(rhs.getName(), rhs.getSignGrade(), rhs.getExeGrade())
-{}
-
-ShrubberyCreationForm::~ShrubberyCreationForm()
+	: AForm(rhs.getName(), rhs.getSignGrade(), rhs.getExeGrade()), target(rhs.target)
 {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
 {
 	if (this != &rhs) {
-		const_cast<std::string&>(target) = rhs.target;
+		target = rhs.target;
 	}
 	return *this;
 }
+
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{}
 
 std::string ShrubberyCreationForm::asciiTrees() const
 {
@@ -54,5 +54,4 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		throw GradeTooLowException();
 	}
 	createFile();
-	return ;
 }

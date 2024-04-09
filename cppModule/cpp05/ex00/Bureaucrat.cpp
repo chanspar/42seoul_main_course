@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name(""), grade(150)
+Bureaucrat::Bureaucrat() : name("newbie"), grade(150)
 {
 }
 
@@ -25,7 +25,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& rhs)
 {
 	if (this != &rhs) {
 		grade = rhs.grade;
-		const_cast<std::string&>(name) = rhs.name;
 	}
 	return *this;
 }

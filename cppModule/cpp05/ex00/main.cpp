@@ -7,16 +7,16 @@ int main() {
         std::cout << err1 << std::endl;
         Bureaucrat err2("err2", 4242);
         std::cout << err2 << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     try {
         std::cout << "----------check low grade----------" << std::endl;
         Bureaucrat err2("err2", 4242);
         std::cout << err2 << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     std::cout << "----------check increase ----------" << std::endl;
@@ -27,8 +27,8 @@ int main() {
         std::cout << bureaucrat1 << std::endl;
         bureaucrat1.incrementGrade();
         std::cout << bureaucrat1 << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     std::cout << "----------check decrease ----------" << std::endl;
@@ -39,8 +39,8 @@ int main() {
         std::cout << bureaucrat2 << std::endl;
         bureaucrat2.decrementGrade();
         std::cout << bureaucrat2 << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception caught: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     return 0;

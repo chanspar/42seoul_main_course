@@ -1,6 +1,6 @@
 #include "Form.hpp"
 
-Form::Form() : name(""), isSigned(false), signGrade(1), exeGrade(1)
+Form::Form() : name("master"), isSigned(false), signGrade(1), exeGrade(1)
 {}
 
 Form::Form(const std::string name, const unsigned int signGrade, const unsigned int exeGrade)
@@ -28,9 +28,6 @@ Form& Form::operator=(const Form& rhs)
 {
 	if (this != &rhs) {
 		isSigned = rhs.isSigned;
-		const_cast<std::string&>(name) = rhs.name;
-		const_cast<unsigned int&>(signGrade) = rhs.signGrade;
-		const_cast<unsigned int&>(exeGrade) = rhs.exeGrade;
 	}
 	return *this;
 }

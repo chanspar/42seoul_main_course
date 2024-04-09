@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name(""), grade(150)
+Bureaucrat::Bureaucrat() : name("newbie"), grade(150)
 {
 }
 
@@ -25,7 +25,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& rhs)
 {
 	if (this != &rhs) {
 		grade = rhs.grade;
-		const_cast<std::string&>(name) = rhs.name;
 	}
 	return *this;
 }
@@ -85,8 +84,11 @@ void Bureaucrat::signForm(Form& rhs)
 		std::cout << name << " couldn't sign " << rhs.getName() << " because already signed" << std::endl;
 	}
 	else {
-		rhs.beSigned(*this);
-		std::cout << name << " signed " << rhs.getName() << std::endl;
+		try {
+			rhs.beSigned(*this);
+			std::cout << name << " signed " << rhs.getName() << std::endl;
+		} catch (const std::exception& e) {
+			std::cerr << e.what() << std::endl;
+		}
 	}
-
 }

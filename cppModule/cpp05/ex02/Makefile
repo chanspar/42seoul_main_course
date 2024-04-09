@@ -17,6 +17,7 @@ clean:
 	@rm -rf $(OBJS)
 
 fclean: clean
+	@rm -rf *_shrubbery
 	@rm -rf $(NAME)
 
 re:
